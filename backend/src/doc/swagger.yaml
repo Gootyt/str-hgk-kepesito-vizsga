@@ -191,7 +191,7 @@ paths:
       description: Get a School
       parameters:
         - in: path
-          name: _id
+          name: id
           required: true
           schema:
             type: string
@@ -219,7 +219,7 @@ paths:
       description: Updates a School
       parameters:
         - in: path
-          name: _id
+          name: id
           required: true
           schema:
             type: string
@@ -252,7 +252,7 @@ paths:
       description: Removes a School
       parameters:
         - in: path
-          name: _id
+          name: id
           required: true
           schema:
             type: string
@@ -276,6 +276,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+
 components:
   schemas:
     Student:
@@ -295,22 +296,22 @@ components:
           type: string
     School:
       type: object
-      required:        
-        - name
-        - city
-        - street
-        - zipcode
-      properties:
-        name:
+      properties: 
+        name: 
           type: string
-        city:
+        city: 
           type: string
-        street:
+        street: 
           type: string
-        zipcode:
+          required: true
+        zipcode: 
           type: number
-        classroom:
-          type: array
+        classrooms:
+          type: object
+          properties: 
+            name: 
+              type: string
+              required: true
     Error:
       type: object
       required:
