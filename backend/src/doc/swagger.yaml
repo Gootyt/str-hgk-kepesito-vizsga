@@ -56,7 +56,7 @@ paths:
       description: Get a Student
       parameters:
         - in: path
-          name: _id
+          name: id
           required: true
           schema:
             type: string
@@ -84,7 +84,7 @@ paths:
       description: Updates a Student
       parameters:
         - in: path
-          name: _id
+          name: id
           required: true
           schema:
             type: string
@@ -117,7 +117,7 @@ paths:
       description: Removes a Student
       parameters:
         - in: path
-          name: _id
+          name: id
           required: true
           schema:
             type: string
@@ -235,7 +235,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/School'
+                $ref: '#/components/schemas/Student'
         '400':
           description: Invalid request when the post data is invalid
           content:
@@ -276,7 +276,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
 components:
   schemas:
     Student:
@@ -296,22 +295,36 @@ components:
           type: string
     School:
       type: object
-      properties: 
-        name: 
+      required:
+        - name
+        - city
+        - street
+        - zipcode
+      properties:
+        name:
           type: string
-        city: 
+        city:
           type: string
-        street: 
+        street:
           type: string
-          required: true
-        zipcode: 
+        zipcode:
           type: number
         classrooms:
-          type: object
-          properties: 
-            name: 
-              type: string
-              required: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Classroom'
+    Classroom:
+      type: string      
+    Error:
+      type: object
+      required:
+        - message
+        - has_error
+      properties:
+        message:
+          type: string
+        has_error:
+          type: boolean
     Error:
       type: object
       required:
